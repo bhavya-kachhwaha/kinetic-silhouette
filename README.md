@@ -1,23 +1,25 @@
 # Kinetic Silhouette
 
-Become part of a particle landscape and see your movement glow.
+Draw a particle silhouette and highlight moving regions.
 
-[Open the browser demo](https://bhavya.agenticsystems.workers.dev/demos/kinetic-silhouette/)
+This repo opens one mode of [Python Webcam Studio](https://github.com/bhavya-kachhwaha/python-webcam-studio). The studio is pinned as a Git submodule under [studio](studio), with the Python, Node.js, browser JavaScript, HTML, CSS, model setup, and tests shared by all four app repos.
 
-## Run locally
+[Open the public browser demo](https://bhavya.agenticsystems.workers.dev/demos/kinetic-silhouette/) · [Shared walkthrough](https://github.com/bhavya-kachhwaha/python-webcam-studio/blob/main/WALKTHROUGH.md) · [App chapter](https://github.com/bhavya-kachhwaha/python-webcam-studio/blob/main/WALKTHROUGH-SILHOUETTE.md)
 
-Run `python3 -m http.server 8876 --bind 127.0.0.1` from this folder, then open the app at [localhost](http://127.0.0.1:8876/).
+## Run the Python-backed browser app
 
-Start the camera and move your arm to turn moving particles gold. Demo silhouette opens the artwork without a camera.
+```bash
+git clone --recurse-submodules https://github.com/bhavya-kachhwaha/kinetic-silhouette.git
+cd kinetic-silhouette/studio
+uv venv --python 3.12
+uv pip install --python .venv/bin/python -r requirements.txt
+.venv/bin/python download_models.py
+cd ..
+npm start
+```
 
-This standalone edition opens directly in its own mode and shares the Webcam Studio source. Frames stay in your browser. The model files download on first use.
+Open [the local app](http://127.0.0.1:8894/kinetic-silhouette/), then select **Start camera**. Use **Mirror camera** to switch orientation. Node.js 22 or newer starts the same Python server from this repo. The shared README includes the pip setup and container commands.
 
-[Line-by-line code walkthrough](./docs/code-walkthrough.md)
+To use the desktop preview from this repo, run `studio/.venv/bin/python run.py`. Pass `--video FILE` to replay a clip. See [the launcher walkthrough](WALKTHROUGH.md) for how the two commands connect to the shared code.
 
-## References
-
-- [Tuba's sign-to-voice demo](https://github.com/tubakhxn/sign-language-to-voice-system)
-- [See and Tell](https://github.com/tubakhxn/see-and-tell)
-- [Living Particle Artwork](https://github.com/tubakhxn/Living-Particle-Artwork)
-
-Run `node --test test/*.test.mjs` to verify object and motion calculations.
+If you cloned without the shared source, run `git submodule update --init --recursive` from the app repo.
